@@ -1,4 +1,4 @@
-package error
+package custom_errors
 
 import "net/http"
 
@@ -39,5 +39,14 @@ func NewUserNotFoundError(message string) *CustomErr {
 		Message: message,
 		Err:     "not_found",
 		Code:    http.StatusNotFound,
+	}
+}
+
+func NewUserValidationFieldsError(message string, causes []Causes) *CustomErr {
+	return &CustomErr{
+		Message: message,
+		Err:     "fields_validation_error",
+		Code:    http.StatusBadRequest,
+		Causes:  causes,
 	}
 }
