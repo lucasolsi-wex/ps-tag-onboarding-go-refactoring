@@ -11,5 +11,5 @@ type userDomainService struct {
 
 type UserDomainService interface {
 	CreateUser(domainInterface UserDomainInterface) *custom_errors.CustomErr
-	FindUser(string) (domainInterface *UserDomainInterface, err *custom_errors.CustomErr)
+	FindUserById(string) (domainInterface UserDomainInterface, err *custom_errors.CustomErr)
 }

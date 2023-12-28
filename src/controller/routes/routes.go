@@ -5,7 +5,7 @@ import (
 	"lucasolsi-wex/ps-tag-onboarding-go/src/controller"
 )
 
-func InitRoutes(rg *gin.RouterGroup) {
-	rg.GET("/user/:userId", controller.GetUserById)
-	rg.POST("/user", controller.CreateUser)
+func InitRoutes(rg *gin.RouterGroup, controllerInterface controller.UserControllerInterface) {
+	rg.GET("/user/:userId", controllerInterface.FindUserById)
+	rg.POST("/user", controllerInterface.CreateUser)
 }

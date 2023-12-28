@@ -6,10 +6,11 @@ import (
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model/request"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/service"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/utils"
+	"lucasolsi-wex/ps-tag-onboarding-go/src/view"
 	"net/http"
 )
 
-func CreateUser(gc *gin.Context) {
+func (uc *userControllerInterface) CreateUser(gc *gin.Context) {
 	var userRequest request.UserRequest
 
 	if err := gc.ShouldBindJSON(userRequest); err != nil {
@@ -20,12 +21,11 @@ func CreateUser(gc *gin.Context) {
 	fmt.Println(userRequest)
 
 	domain := service.NewUserDomain(userRequest.FirstName, userRequest.LastName, userRequest.Email, userRequest.Age)
-	userService := service.NewUserDomainService()
 
-	if err := userService.CreateUser(domain); err != nil {
+	if err := uc.service.CreateUser(domain); err != nil {
 		gc.JSON(err.Code, err)
 		return
 	}
 
-	gc.String(http.StatusCreated, "")
+	gc.JSON(http.StatusCreated, view.ConvertDomainToResponse(domain))
 }
