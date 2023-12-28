@@ -6,7 +6,6 @@ import (
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model/request"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/service"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/utils"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/view"
 	"net/http"
 )
 
@@ -27,5 +26,5 @@ func (uc *userControllerInterface) CreateUser(gc *gin.Context) {
 		return
 	}
 
-	gc.JSON(http.StatusCreated, view.ConvertDomainToResponse(domain))
+	gc.JSON(http.StatusCreated, utils.ConvertDomainToResponse(domain))
 }

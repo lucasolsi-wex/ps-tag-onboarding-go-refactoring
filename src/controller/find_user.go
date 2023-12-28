@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/custom_errors"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/view"
+	"lucasolsi-wex/ps-tag-onboarding-go/src/utils"
 	"net/http"
 )
 
@@ -23,5 +23,5 @@ func (uc *userControllerInterface) FindUserById(gc *gin.Context) {
 		return
 	}
 
-	gc.JSON(http.StatusOK, view.ConvertDomainToResponse(userDomain))
+	gc.JSON(http.StatusOK, utils.ConvertDomainToResponse(userDomain))
 }

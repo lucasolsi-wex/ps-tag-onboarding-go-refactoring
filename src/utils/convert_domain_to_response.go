@@ -1,4 +1,4 @@
-package view
+package utils
 
 import (
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model/response"
