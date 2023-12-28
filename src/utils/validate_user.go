@@ -61,3 +61,16 @@ func ValidateFirstAndLastName(request request.UserRequest) *custom_errors.Custom
 	}
 	return nil
 }
+
+func ValidateNameUniqueness(alreadyExists bool) *custom_errors.CustomErr {
+	if alreadyExists {
+		errorCauses := []custom_errors.Causes{}
+		cause := custom_errors.Causes{
+			Field:   "firstName/lastName",
+			Message: "User with the same first and last name already exists",
+		}
+		errorCauses = append(errorCauses, cause)
+		return custom_errors.NewUserValidationFieldsError("Invalid fields", errorCauses)
+	}
+	return nil
+}

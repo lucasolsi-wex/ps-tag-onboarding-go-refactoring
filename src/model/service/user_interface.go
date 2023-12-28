@@ -17,4 +17,5 @@ type userDomainService struct {
 type UserDomainService interface {
 	CreateUser(domainInterface model.UserDomainInterface) (model.UserDomainInterface, *custom_errors.CustomErr)
 	FindUserById(string) (domainInterface model.UserDomainInterface, err *custom_errors.CustomErr)
+	ExistsByFirstNameAndLastName(firstName, lastName string) bool
 }

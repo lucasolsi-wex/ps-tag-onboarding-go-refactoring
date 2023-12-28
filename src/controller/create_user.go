@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model/request"
@@ -17,8 +16,20 @@ func (uc *userControllerInterface) CreateUser(gc *gin.Context) {
 		gc.JSON(customErr.Code, customErr)
 		return
 	}
-	fmt.Println(userRequest)
 
+	customErrName := utils.ValidateFirstAndLastName(userRequest)
+	if customErrName != nil {
+		gc.JSON(customErrName.Code, customErrName)
+		return
+	}
+
+	nameCombinationExists := uc.service.ExistsByFirstNameAndLastName(userRequest.FirstName, userRequest.LastName)
+	customErrUniqueness := utils.ValidateNameUniqueness(nameCombinationExists)
+
+	if customErrUniqueness != nil {
+		gc.JSON(customErrUniqueness.Code, customErrUniqueness)
+		return
+	}
 	domain := model.NewUserDomain(userRequest.FirstName, userRequest.LastName, userRequest.Email, userRequest.Age)
 	domainResult, err := uc.service.CreateUser(domain)
 
