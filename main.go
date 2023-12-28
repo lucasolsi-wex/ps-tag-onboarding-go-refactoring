@@ -1,12 +1,12 @@
 package main
 
 import (
+	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"log"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/controller"
+	"lucasolsi-wex/ps-tag-onboarding-go/src/config/database"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/controller/routes"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/service"
 )
 
 func main() {
@@ -16,8 +16,9 @@ func main() {
 		return
 	}
 
-	userService := service.NewUserDomainService()
-	userController := controller.NewUserControllerInterface(userService)
+	dbConnection, err := database.NewMongoDBConnection(context.Background())
+
+	userController := initDependencies(dbConnection)
 
 	router := gin.Default()
 	routes.InitRoutes(&router.RouterGroup, userController)

@@ -3,7 +3,7 @@ package repository
 import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/custom_errors"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/service"
+	"lucasolsi-wex/ps-tag-onboarding-go/src/model"
 )
 
 func NewUserRepository(database *mongo.Database) UserRepository {
@@ -15,5 +15,5 @@ type userRepository struct {
 }
 
 type UserRepository interface {
-	CreateUser(domainInterface service.UserDomainInterface) (service.UserDomainInterface, *custom_errors.CustomErr)
+	CreateUser(domainInterface model.UserDomainInterface) (model.UserDomainInterface, *custom_errors.CustomErr)
 }

@@ -1,4 +1,4 @@
-package service
+package model
 
 type userDomain struct {
 	id        string

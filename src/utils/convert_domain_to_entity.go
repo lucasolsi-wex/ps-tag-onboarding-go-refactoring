@@ -1,11 +1,11 @@
 package utils
 
 import (
+	"lucasolsi-wex/ps-tag-onboarding-go/src/model"
 	"lucasolsi-wex/ps-tag-onboarding-go/src/model/entity"
-	"lucasolsi-wex/ps-tag-onboarding-go/src/service"
 )
 
-func ConvertDomainToEntity(domain service.UserDomainInterface) *entity.UserEntity {
+func ConvertDomainToEntity(domain model.UserDomainInterface) *entity.UserEntity {
 
 	return &entity.UserEntity{
 		FirstName: domain.GetFirstName(),
